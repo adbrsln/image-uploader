@@ -1,3 +1,4 @@
+<?php require_once('config.php')?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,13 +7,26 @@
 </head>
 <body>
 
-
-
 <form class="form-signin" action="upload.php" method="post" enctype="multipart/form-data">
 <img src="logo.png" alt="logo" width="100%" class="mb-4">
 <?php
 if(isset($_GET['id']) && isset($_GET['type'])){
-  $link_address = 'http://adbroslan.com/imgr/'. $_GET['id'].'.'.$_GET['type'];
+  if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') 
+  $link = "https"; 
+  else
+      $link = "http"; 
+
+  // Here append the common URL characters. 
+  $link .= "://"; 
+    
+  // Append the host(domain name, ip) to the URL. 
+  $link .= $_SERVER['HTTP_HOST']; 
+  
+  if(isset($folder)){
+    $link .= $folder;
+  }
+  $link_address = $link.'/'. $_GET['id'].'.'.$_GET['type'];
+  
   echo '<div class="alert alert-success" role="alert">Link : <a href="'.$link_address.'" target="blank">'.$link_address.'</a></div>';
 }
 ?>
@@ -35,7 +49,9 @@ if(isset($_GET['id']) && isset($_GET['type'])){
 if(isset($_GET['e'])){
     echo "<script>Swal.fire({title: 'Error!',text: 'Do you want to continue',icon: 'error',confirmButtonText: 'Cool'})</script>";
 }
-
+if(isset($_GET['id']) && isset($_GET['type'])){
+  echo "<script>Swal.fire({title: 'Upload Success',text: 'Your link has been created',icon: 'success',confirmButtonText: 'Yay!'})</script>";
+}
 ?>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
