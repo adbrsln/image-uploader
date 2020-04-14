@@ -9,6 +9,7 @@
 
 
 <form class="form-signin" action="upload.php" method="post" enctype="multipart/form-data">
+<img src="logo.png" alt="logo" width="100%" class="mb-4">
 <?php
 if(isset($_GET['id']) && isset($_GET['type'])){
   $link_address = 'http://adbroslan.com/imgr/'. $_GET['id'].'.'.$_GET['type'];
@@ -16,9 +17,9 @@ if(isset($_GET['id']) && isset($_GET['type'])){
 }
 ?>
   <label for="inputEmail" class="sr-only">Email address</label>
-  <input type="text" id="inputUsername" name="username" class="form-control" placeholder="username" required="" autofocus="">
+  <input type="text" id="inputUsername" name="username" class="form-control mb-3" placeholder="username" required="" autofocus="">
   <label for="inputPassword" class="sr-only">Password</label>
-  <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required="">
+  <input type="password" id="inputPassword" name="password" class="form-control mb-3" placeholder="Password" required="">
   <div class="input-group mb-3">
   <div class="custom-file">
     <input type="file" class="custom-file-input" name="fileToUpload" id="fileToUpload" aria-describedby="inputGroupFileAddon01">
