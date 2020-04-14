@@ -1,4 +1,5 @@
 <?php
+require_once('config.php');
 $target_file =  basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -7,7 +8,7 @@ $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 //CHECK if got username or password
 if(isset($_POST['username']) && isset($_POST['password'])){
     //check if username and password is correct
-    if(trim($_POST['username']) == 'yourusername' && trim($_POST['password'])=='yourpassword'){
+    if(trim($_POST['username']) == $username && trim($_POST['password'])==$password){
         if(isset($_POST["submit"])) {
             $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
             if($check !== false) {
